@@ -1,32 +1,26 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import { connectDB } from './config/dbConfig';
 import userRoutes from './routes/userRoutes';
 
-
+// Initialize the Express application
 const app: Express = express();
-const port = process.env.PORT || 3000;
 
-//Middleware
+// Middleware
 app.use(express.json());
 
-//Routes
+// Routes
 app.use('/api/users', userRoutes);
 
-connectDB().then(() => {
-    // Start the server only after successfully connecting to the database
-    app.listen(port, () => {
-      console.log('Server is running on port:', port);
-    });
-  }).catch((error) => {
-    console.error('Failed to connect to the database', error);
-  });
-
+// Error Handling Middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-  });
+});
 
+// Export the app instance
 export default app;
+
+// Connect to database and start server in a separate file

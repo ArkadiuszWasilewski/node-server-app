@@ -1,37 +1,32 @@
-import express, { Express, Request, Response } from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
+import express, { Express, Request, Response } from 'express';
+import { connectDB } from './config/dbConfig';
+import userRoutes from './routes/userRoutes';
+
+
 const app: Express = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-let greetings: string = "Hello World";
+//Middleware
+app.use(express.json());
 
-// Retrieve MongoDB URI from environment variables
-const mongoURI: string | undefined = process.env.MONGO_DB_URI;
+//Routes
+app.use('/api/users', userRoutes);
 
-if (!mongoURI) {
-  console.error('MongoDB URI is not defined in environment variables');
-  process.exit(1);
-}
-
-// Connect to MongoDB Atlas using Mongoose
-mongoose
-  .connect(mongoURI)
-  .then(() => {
-    console.log('Connected to MongoDB Atlas');
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB Atlas:', error);
+connectDB().then(() => {
+    // Start the server only after successfully connecting to the database
+    app.listen(port, () => {
+      console.log('Server is running on port:', port);
+    });
+  }).catch((error) => {
+    console.error('Failed to connect to the database', error);
   });
 
-app.get('/', (req: Request, res: Response) => { 
-  res.send(greetings.length.toString()); // Convert the number to a string to avoid type issues.
-  console.log('Request received at /');
-});
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
-app.listen(port, () => {
-  console.log('Listening on port:', port);
-});
+export default app;

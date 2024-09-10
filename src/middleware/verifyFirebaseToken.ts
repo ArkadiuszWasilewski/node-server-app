@@ -1,7 +1,7 @@
 import admin from "../config/firebaseAdmin";
 import { Request, Response, NextFunction } from 'express';
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
     user?: admin.auth.DecodedIdToken;
 }
 
@@ -28,4 +28,4 @@ const verifyFirebaseToken = async (
     }
 };
 
-export default verifyFirebaseToken;
+export default verifyFirebaseToken; 

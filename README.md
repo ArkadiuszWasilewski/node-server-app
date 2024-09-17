@@ -21,7 +21,7 @@ This is the backend repository for a web application that communicates with a cl
 
 ## Project Structure
 
-.
+```
 ├── config/
 │ ├── dbConfig.ts # Database connection configuration
 │ ├── firebaseAdmin.ts # Firebase Admin SDK initialization
@@ -42,6 +42,7 @@ This is the backend repository for a web application that communicates with a cl
 ├── app.ts # Main Express app setup
 ├── server.ts # Server and database connection logic
 └── .env # Environment variables (not included in the repo)
+```
 
 ## License
 

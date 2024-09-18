@@ -23,25 +23,25 @@ This is the backend repository for a web application that communicates with a cl
 
 ```
 ├── config/
-│ ├── dbConfig.ts # Database connection configuration
-│ ├── firebaseAdmin.ts # Firebase Admin SDK initialization
+│ ├── dbConfig.ts                   # Database connection configuration
+│ ├── firebaseAdmin.ts              # Firebase Admin SDK initialization
 ├── controllers/
-│ ├── tokenControllers.ts # Token verification logic
-│ ├── userController.ts # User-related logic (CRUD operations)
+│ ├── tokenControllers.ts           # Token verification logic
+│ ├── userController.ts             # User-related logic (CRUD operations)
 ├── middleware/
-│ ├── cors.ts # CORS configuration
-│ ├── errorHandler.ts # Global error handling middleware
-│ ├── verifyFirebaseToken.ts # Firebase token verification middleware
+│ ├── cors.ts                       # CORS configuration
+│ ├── errorHandler.ts               # Global error handling middleware
+│ ├── verifyFirebaseToken.ts        # Firebase token verification middleware
 ├── models/
-│ └── userModel.ts # Mongoose user schema and model
+│ └── userModel.ts                  # Mongoose user schema and model
 ├── routes/
-│ ├── tokenRoutes.ts # Routes for token-related operations
-│ └── userRoutes.ts # Routes for user-related operations
+│ ├── tokenRoutes.ts                # Routes for token-related operations
+│ └── userRoutes.ts                 # Routes for user-related operations
 ├── types/
-│ └── AuthenticatedRequest.ts # TypeScript type for authenticated requests
-├── app.ts # Main Express app setup
-├── server.ts # Server and database connection logic
-└── .env # Environment variables (not included in the repo)
+│ └── AuthenticatedRequest.ts       # TypeScript type for authenticated requests
+├── app.ts                          # Main Express app setup
+├── server.ts                       # Server and database connection logic
+└── .env                            # Environment variables (not included in the repo)
 ```
 
 ## License

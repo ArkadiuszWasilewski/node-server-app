@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import User from "../models/userModel"
 import admin from "../config/firebaseAdmin"; // Import Firebase Admin SDK
 import { AuthenticatedRequest } from "../types/AuthenticatedRequest";
@@ -28,12 +28,25 @@ export const createUser = async (req: Request, res: Response) => {
 };
 
 //Get user record from firebase admin SDK
-export const getUserRecord = async (req: AuthenticatedRequest, res: Response) => {
+export const getUserRecord = async (
+    req: AuthenticatedRequest, 
+    res: Response) => 
+    {
     try {
         if (!req.user || !req.user.uid) {
             return res.status(401).json({ message: 'Unauthorized, no user found' });
-          }
+        }
+        //Fetch user data from Firebase Admin
         const userRecord  = await admin.auth().getUser(req.user.uid);
+        console.log(userRecord.uid, userRecord.displayName, userRecord.email, userRecord.metadata.creationTime);
+        res.status(200).json({
+            userData: {
+                uid: userRecord.uid,
+                name: userRecord.displayName,
+                email: userRecord.email,
+                firebaseCreationTime: userRecord.metadata.creationTime,
+            }
+        })
     } catch (error: any) {
         res.status(500).json({error: error.message });
     }

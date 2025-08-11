@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
+import testRoutes from './routes/testRoutes';
 import corsMiddleware from './middleware/cors'
 import errorHandler from './middleware/errorHandler';
 
@@ -13,7 +14,10 @@ app.use(express.json());
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/auth', tokenRoutes)
+app.use('/api/auth', tokenRoutes);
+
+// Test Routes
+app.use('/api/test', testRoutes);
 
 // Error Handling Middleware
 app.use(errorHandler);

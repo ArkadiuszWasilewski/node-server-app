@@ -3,7 +3,10 @@ import { getAllUsers, createUser, getUserRecord } from '../controllers/userContr
 
 const router = express.Router();
 
-//router.get('/', getAllUsers);
-router.post('/', createUser);
+//Question: shouldn't it be only for admin? How would it work on deploy?
+router.get('/all', getAllUsers);
+//Create User from client form data
+//router.post('/', createUser);
+router.get('/userrecord', getUserRecord )
 
 export default router;

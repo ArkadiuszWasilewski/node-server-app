@@ -14,7 +14,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 };
 
-//Create new user
+//Create new user based on the form on the client side
 export const createUser = async (req: Request, res: Response) => {
     const {name, email, password} = req.body;
     

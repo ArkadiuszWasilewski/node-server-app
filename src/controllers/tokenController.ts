@@ -2,6 +2,8 @@ import admin from "../config/firebaseAdmin";
 import { AuthenticatedRequest } from "../types/AuthenticatedRequest";
 import { Response, NextFunction } from 'express';
 
+
+// Handles token verification logic
 export const verifyToken = async (
     req: AuthenticatedRequest,
     res: Response,

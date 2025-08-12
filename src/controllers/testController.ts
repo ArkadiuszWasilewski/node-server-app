@@ -1,42 +1,40 @@
 import { Request, Response } from 'express';
 import { data } from '../utils/fakeDataUser';
+import  Report  from '../models/reportModel'
 
 // In-memory array to store reports (replace with database if needed)
 let reports: any[] = [];
 
-
 export const getAllFakeUsers = async (req: Request, res: Response) =>{
     try {
-    
-        // 
         console.log("Showing all fake users.");
         res.send(data);
-
     } catch (error: any) {
         res.status(500).json({error: error.message})
     }
 }
+
 export const postReports = async (req: Request, res: Response) => {
   try {
-    const { sessionData, reportDescription, characterVocation, characterLevel, characterGear, currentSpawn } = req.body;
-
-    // Server-side validation
-
+    const { user, sessionData, characterVocation, characterLevel, characterGear, currentSpawn, reportDescription } = req.body;
     const report = {
-      sessionData,
+      user,
+      sessionData: sessionData || {},
       reportDescription,
       characterVocation,
       characterLevel,
       characterGear,
       currentSpawn,
-      createdAt: new Date().toISOString(),
     };
 
     // Save to in-memory array (replace with database)
     reports.push(report);
     console.log("Saved report:", report); // Log saved report
 
-    return res.status(201).json({ success: true, message: "Report saved successfully" });
+    //Database save
+    const newReport = new Report ({user, sessionData, reportDescription, characterVocation, characterLevel, characterGear, currentSpawn});
+    await newReport.save();
+    res.status(201).json(newReport);
   } catch (error: any) {
     console.error("Error saving report:", error);
     return res.status(500).json({ error: error.message });

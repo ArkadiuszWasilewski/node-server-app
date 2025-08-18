@@ -5,6 +5,8 @@ import { getUserRecord } from '../controllers/userController';
 const router = express.Router();
 
 // POST route for verifying token
+
+// /api/auth
 router.post('/verify-token', verifyToken, getUserRecord);
 
 export default router;

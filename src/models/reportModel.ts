@@ -32,11 +32,11 @@ const sessionDataSchema = new mongoose.Schema({
     },
     Damage: {
         type: Number,
-        requireD: true,
+        required: true,
     },
     "Damage/h": {
         type: Number,
-        requried: true,
+        required: true,
     },
     Healing: {
         type: Number,
@@ -44,7 +44,7 @@ const sessionDataSchema = new mongoose.Schema({
     },
     "Healing/h": {
         type: Number,
-        requried: true,
+        required: true,
     },
     "Killed Monsters": [monsterKilledSchema],
     "Looted Items": [lootedItemSchema],
@@ -84,7 +84,7 @@ const sessionDataSchema = new mongoose.Schema({
 })
 
 // Main Report Schema
-const reportSchema = new mongoose.Schema({
+export const reportSchema = new mongoose.Schema({
     user: {
         type: String,
         required: true
@@ -95,12 +95,12 @@ const reportSchema = new mongoose.Schema({
     },
     reportDescription: {
         type: String,
-        required: true,
+        required: false,
     },
     characterVocation: {
         type: String,
         required: true,
-        enum: ['Paladin', 'Knight', 'Sorcerer', 'Druid', 'Monk'], // Adjust based on valid vocations
+        enum: ['Paladin', 'Knight', 'Sorcerer', 'Druid', 'Monk'],
     },
     characterLevel: {
         type: Number,
@@ -127,6 +127,7 @@ const reportSchema = new mongoose.Schema({
         default: Date.now,
     },
 })
+
 
 const Report = mongoose.model('Report', reportSchema);
 export default Report;

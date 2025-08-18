@@ -3,6 +3,8 @@ import { getAllFakeUsers, getReports, postReports } from '../controllers/testCon
 
 const router = express.Router();
 
+
+// /api/test
 router.get('/fakeusers', getAllFakeUsers);
 router.post('/reports', postReports);
 router.get('/getreports', getReports);
